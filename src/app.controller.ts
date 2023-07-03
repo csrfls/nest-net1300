@@ -7,11 +7,11 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return this.appService.getHello();
+    return this.appService.getService();
   }
 
   @Get('/2')
-  getHello2(): string {
-    return this.appService.getHello2();
+  getHello2(): string[] {
+    return this.appService.getService2();
   }
 }

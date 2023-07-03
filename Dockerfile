@@ -1,6 +1,10 @@
+ARG DATABASE_USER
+
 FROM node:18.16.0-alpine
 
 WORKDIR /app
+
+ENV DATABASE_USER ${DATABASE_USER}
 
 COPY package*.json ./
 
