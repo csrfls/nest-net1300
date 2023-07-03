@@ -1,0 +1,26 @@
+name: Deploying
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Build and Deploy Backend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build image
+        run: docker build -t nest-net1300:1.0.0 .
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      - name: Login to registry
+        run: doctl registry login --expiry-seconds 600
+      - name: Tag image
+        run: docker tag nest-net1300:1.0.0 registry.digitalocean.com/capricciosas/nest-net1300:1.0.0
+      - name: Push image
+        run: docker push registry.digitalocean.com/capricciosas/nest-net1300:1.0.0
