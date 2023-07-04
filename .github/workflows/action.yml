@@ -12,15 +12,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Build image
-        run: docker build -t nest-net1300:1.0.0 .
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
+
+      - name: Login to DigitalOcean Registry
+        uses: docker/login-action@v1
         with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-      - name: Login to registry
-        run: doctl registry login --expiry-seconds 600
-      - name: Tag image
-        run: docker tag nest-net1300:1.0.0 registry.digitalocean.com/capricciosas/nest-net1300
-      - name: Push image
+          registry: registry.digitalocean.com
+          username: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          password: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          
+      - name: Build image
+        run: docker build -t registry.digitalocean.com/capricciosas/nest-net1300 .
+
+      - name: Push to Digital Ocean Registry
         run: docker push registry.digitalocean.com/capricciosas/nest-net1300
