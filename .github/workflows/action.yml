@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Build image
-        run: docker build --build-arg DATABASE_USER=${{ secrets.DATABASE_USER }} -t nest-net1300:1.0.0 .
+        run: docker build -t nest-net1300:1.0.0 .
       - name: Install doctl
         uses: digitalocean/action-doctl@v2
         with:
