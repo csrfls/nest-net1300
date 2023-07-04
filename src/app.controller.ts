@@ -14,4 +14,9 @@ export class AppController {
   getHello2(): string[] {
     return this.appService.getService2();
   }
+
+  @Get('/ok')
+  getOk(): number {
+    return 200;
+  }
 }
