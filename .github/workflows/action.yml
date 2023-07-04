@@ -21,9 +21,6 @@ jobs:
           registry: registry.digitalocean.com
           username: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
           password: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-      - name: Get version
-        uses: nyaa8/package-version@v1
           
       - name: Build image
         run: docker build -t registry.digitalocean.com/capricciosas/nest-net1300:${{github.event.inputs.version }} .
